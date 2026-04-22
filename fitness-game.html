@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness Guessing Game</title>
+
+    <style>
+        body {
+            background: hsl(0, 0%, 98%);
+            font-family: Verdana, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+
+        #game-box {
+            background: white;
+            padding: 30px;
+            width: 60%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #005fa3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="scratch.html">← Back to Scratch Page</a>
+
+    <div id="game-box">
+        <h1>Fitness Guessing Game</h1>
+        <p id="question">Press Start to begin!</p>
+
+        <input type="text" id="answer" placeholder="Your guess here">
+        <br>
+        <button onclick="checkAnswer()">Submit</button>
+        <button onclick="newQuestion()">Start / Next Question</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Which muscle does the incline press primarily work?", a: "upper chest" },
+            { q: "What muscle group does leg press target?", a: "quads" },
+            { q: "Which exercise works the biceps the most: preacher curls or bayesian curls?", a: "bayesian curls" },
+            { q: "What muscle does a pull-up primarily train?", a: "lower lats" },
+            { q: "Which muscle is targeted by shoulder press?", a: "front delts" }
+        ];
+
+        let current;
+
+        function newQuestion() {
+            current = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById("question").textContent = current.q;
+            document.getElementById("result").textContent = "";
+            document.getElementById("answer").value = "";
+        }
+
+        function checkAnswer() {
+            const user = document.getElementById("answer").value.toLowerCase().trim();
+
+            if (user === current.a) {
+                document.getElementById("result").textContent = "Correct!";
+                document.getElementById("result").style.color = "green";
+            } else {
+                document.getElementById("result").textContent = "Incorrect — the answer is " + current.a;
+                document.getElementById("result").style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
